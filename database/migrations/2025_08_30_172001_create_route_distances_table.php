@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignId('route_id')->constrained('routes')->onDelete('cascade');
             $table->float('distance_km')->nullable(); // distancia en kilómetros
             $table->time('estimated_time')->nullable(); // tiempo estimado entre las paradas
+            $table->unique(['route_id', 'from_stop_id', 'to_stop_id']);
+
         });
     }
 

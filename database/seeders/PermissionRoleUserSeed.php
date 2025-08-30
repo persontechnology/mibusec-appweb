@@ -36,7 +36,7 @@ class PermissionRoleUserSeed extends Seeder
                 // atributos a crear si no existe
                 'name' => 'Vilmer',
                 'password' => Hash::make('david.criollo14@gmail.com'),
-                'is_active' => true,
+                // 'is_active' => true,
                 'email_verified_at'=>now()
             ]
         );
