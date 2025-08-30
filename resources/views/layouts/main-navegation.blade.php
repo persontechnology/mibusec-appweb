@@ -8,9 +8,15 @@
 							<i class="ph-dots-three sidebar-resize-show"></i>
 						</li>
 						<li class="nav-item">
-							<a href="index.html" class="nav-link {{ Route::is('welcome') ? 'active' : '' }}">
+							<a href="{{ route('welcome') }}" class="nav-link {{ Route::is('welcome') ? 'active' : '' }}">
 								<i class="ph-house"></i>
                                 <span>Inicio</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('stops.index') }}" class="nav-link {{ Route::is('stops.*') ? 'active' : '' }}">
+								<i class="ph ph-traffic-signal"></i>
+                                <span>Paradas</span>
 							</a>
 						</li>
 						
