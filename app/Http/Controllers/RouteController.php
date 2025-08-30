@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\RouteDataTable;
 use App\Models\Route;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,9 @@ class RouteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(RouteDataTable $dataTable)
     {
-        //
+        return $dataTable->render('routes.index');
     }
 
     /**

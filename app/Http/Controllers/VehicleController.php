@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\VehicleDataTable;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,9 @@ class VehicleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(VehicleDataTable $dataTable)
     {
-        //
+        return $dataTable->render('vehicles.index');
     }
 
     /**

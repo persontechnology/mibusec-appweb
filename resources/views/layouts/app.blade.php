@@ -21,10 +21,15 @@
 	<!-- /core JS files -->
 
 	<!-- Theme JS files -->
-	<script src="{{ asset('assets/js/vendor/visualization/d3/d3.min.js') }}"></script>
-	<script src="{{ asset('assets/js/vendor/visualization/d3/d3_tooltip.js') }}"></script>
+	{{-- <script src="{{ asset('assets/js/vendor/visualization/d3/d3.min.js') }}"></script>
+	<script src="{{ asset('assets/js/vendor/visualization/d3/d3_tooltip.js') }}"></script> --}}
+
+
+	<script src="{{ asset('assets/js/jquery/jquery.min.js') }}"></script>
+	<script src="{{ asset('assets/js/vendor/tables/datatables/datatables.min.js') }}"></script>
 
 	<script src="{{ asset('assets/js/app.js') }}"></script>
+	{{-- <script src="{{ asset('assets/demo/pages/datatables_basic.js') }}"></script> --}}
 
 	{{-- <script src="{{ asset('assets/demo/pages/dashboard.js') }}"></script>
 	<script src="{{ asset('assets/demo/charts/pages/dashboard/streamgraph.js') }}"></script>
@@ -38,6 +43,9 @@
 	<script src="{{ asset('assets/demo/charts/pages/dashboard/pies.js') }}"></script>
 	<script src="{{ asset('assets/demo/charts/pages/dashboard/bullets.js') }}"></script> --}}
 	<!-- /theme JS files -->
+
+	
+
 
 </head>
 
@@ -1024,6 +1032,6 @@
 		</div>
 	</div>
 	<!-- /demo config -->
-
+	@stack('scripts')
 </body>
 </html>

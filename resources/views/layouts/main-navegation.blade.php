@@ -19,6 +19,18 @@
                                 <span>Paradas</span>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="{{ route('routes.index') }}" class="nav-link {{ Route::is('routes.*') ? 'active' : '' }}">
+								<i class="ph ph-path"></i>
+                                <span>Rutas</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="{{ route('vehicles.index') }}" class="nav-link {{ Route::is('vehicles.*') ? 'active' : '' }}">
+								<i class="ph ph-bus"></i>
+                                <span>Vehiculos</span>
+							</a>
+						</li>
 						
 						{{-- <li class="nav-item">
 							<a href="../../../../docs/other_changelog.html" class="nav-link">

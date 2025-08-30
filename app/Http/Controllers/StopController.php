@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\StopDataTable;
 use App\Models\Stop;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,9 @@ class StopController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(StopDataTable $dataTable)
     {
-        //
+        return $dataTable->render('stops.index');
     }
 
     /**

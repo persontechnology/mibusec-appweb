@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RouteController;
 use App\Http\Controllers\StopController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
     // stops resource routes
     Route::resource('stops', StopController::class);
+    Route::resource('routes', RouteController::class);
+    Route::resource('vehicles', VehicleController::class);
 
 });
 
