@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RolPermisoController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\RouteStopsController;
 use App\Http\Controllers\StopController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\StopTimeController;
@@ -23,11 +25,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // roles y permisos
+    Route::resource('rol-permisos', RolPermisoController::class);
 
     // stops resource routes
     Route::resource('stops', StopController::class);
     Route::resource('routes', RouteController::class);
     Route::resource('vehicles', VehicleController::class);
+
+    /* route stop resource routes */
+    Route::resource('route.stops', RouteStopsController::class);    
 });
 
 require __DIR__ . '/auth.php';

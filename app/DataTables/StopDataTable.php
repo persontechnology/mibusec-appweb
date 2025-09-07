@@ -22,7 +22,9 @@ class StopDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'stop.action')
+            ->addColumn('action', function ($stop)  {
+                return view('stops.actions', compact('stop'));
+            })
             ->setRowId('id');
     }
 

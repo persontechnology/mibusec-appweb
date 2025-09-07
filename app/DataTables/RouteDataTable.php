@@ -22,7 +22,9 @@ class RouteDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'route.action')
+            ->addColumn('action', function($route){
+                return view('routes.actions', compact('route'));
+            })
             ->setRowId('id');
     }
 

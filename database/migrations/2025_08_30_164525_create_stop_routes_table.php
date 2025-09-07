@@ -21,6 +21,8 @@ return new class extends Migration
             $table->time('departure_time')->nullable(); // hora de salida estimada
             $table->string('notes')->nullable(); // notas adicionales
             $table->enum('status', ['START', 'PROCESS','END'])->default('START'); // estado de la parada en la ruta
+            $table->unique(['route_id', 'stop_id']); // evitar duplicados
+
         });
     }
 
