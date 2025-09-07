@@ -18,6 +18,11 @@
 @section('content')
     <div class="container">
         <div class="card">
+            {{-- title --}}
+            <div class="card-header">
+                <h1 class="bg-danger">TABLA PARADAS RUTA</h1>
+                <h4 class="card-title">Paradas de la Ruta: {{ $route->name }} ({{ $route->code }})</h4>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     {{ $dataTable->table() }}
@@ -26,6 +31,10 @@
         </div>
         
         <div class="card">
+            <div class="card-header">
+                <h1 class="bg-success">TABLA RUTA DISTANCIA</h1>
+                <h4 class="card-title">Paradas de la Ruta: {{ $route->name }} ({{ $route->code }})</h4>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     {{-- tabla para route_distances --}}
