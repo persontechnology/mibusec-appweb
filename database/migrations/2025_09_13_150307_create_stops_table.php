@@ -13,16 +13,10 @@ return new class extends Migration
     {
         Schema::create('stops', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->geometry('geom', subtype: 'point', srid: 4326);
             $table->timestamps();
-            $table->string('code');
-            $table->string('name')->nullable();
-            $table->string('description')->nullable();
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
-            $table->string('address')->nullable();
-            $table->enum('status',['ACTIVE','ANACTIVE'])->nullable();
-            $table->string('notes')->nullable();
-            
+            $table->softDeletes();
         });
     }
 

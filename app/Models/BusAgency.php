@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Stop extends Model
+class BusAgency extends Model
 {
     //
 }

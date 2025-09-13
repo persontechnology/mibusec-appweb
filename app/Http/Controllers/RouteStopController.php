@@ -2,23 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VehicleRoute;
+use App\Models\RouteStop;
 use Illuminate\Http\Request;
 
-class VehicleRouteController extends Controller
+class RouteStopController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
         //
     }
@@ -34,15 +26,7 @@ class VehicleRouteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(VehicleRoute $vehicleRoute)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(VehicleRoute $vehicleRoute)
+    public function show(RouteStop $routeStop)
     {
         //
     }
@@ -50,7 +34,7 @@ class VehicleRouteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, VehicleRoute $vehicleRoute)
+    public function update(Request $request, RouteStop $routeStop)
     {
         //
     }
@@ -58,7 +42,7 @@ class VehicleRouteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VehicleRoute $vehicleRoute)
+    public function destroy(RouteStop $routeStop)
     {
         //
     }

@@ -2,23 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RouteDistance;
+use App\Models\Agency;
 use Illuminate\Http\Request;
 
-class RouteDistanceController extends Controller
+class AgencyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
         //
     }
@@ -34,15 +26,7 @@ class RouteDistanceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RouteDistance $routeDistance)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(RouteDistance $routeDistance)
+    public function show(Agency $agency)
     {
         //
     }
@@ -50,7 +34,7 @@ class RouteDistanceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RouteDistance $routeDistance)
+    public function update(Request $request, Agency $agency)
     {
         //
     }
@@ -58,7 +42,7 @@ class RouteDistanceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RouteDistance $routeDistance)
+    public function destroy(Agency $agency)
     {
         //
     }

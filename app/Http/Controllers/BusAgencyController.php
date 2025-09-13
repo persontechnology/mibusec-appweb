@@ -2,23 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StopRoute;
+use App\Models\BusAgency;
 use Illuminate\Http\Request;
 
-class StopRouteController extends Controller
+class BusAgencyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
     {
         //
     }
@@ -34,15 +26,7 @@ class StopRouteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(StopRoute $stopRoute)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(StopRoute $stopRoute)
+    public function show(BusAgency $busAgency)
     {
         //
     }
@@ -50,7 +34,7 @@ class StopRouteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StopRoute $stopRoute)
+    public function update(Request $request, BusAgency $busAgency)
     {
         //
     }
@@ -58,7 +42,7 @@ class StopRouteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StopRoute $stopRoute)
+    public function destroy(BusAgency $busAgency)
     {
         //
     }

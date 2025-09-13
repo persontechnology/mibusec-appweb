@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Stop;
+use App\Models\AgencyRoute;
 use Illuminate\Http\Request;
 
-class StopController extends Controller
+class AgencyRouteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class StopController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Stop $stop)
+    public function show(AgencyRoute $agencyRoute)
     {
         //
     }
@@ -34,7 +34,7 @@ class StopController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Stop $stop)
+    public function update(Request $request, AgencyRoute $agencyRoute)
     {
         //
     }
@@ -42,7 +42,7 @@ class StopController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Stop $stop)
+    public function destroy(AgencyRoute $agencyRoute)
     {
         //
     }
