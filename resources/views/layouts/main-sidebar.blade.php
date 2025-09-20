@@ -46,7 +46,14 @@
                         <span>Agencias</span>
                     </a>
                 </li>
-		
+                {{-- vehicles --}}
+                <li class="nav-item">
+                    <a href="{{ route('vehicles.index') }}" class="nav-link {{ Route::is('vehicles.*') ? 'active' : '' }}">
+                        <i class="ph ph-bus"></i>
+                        <span>Vehículos</span>
+                    </a>
+                </li>
+                
                 <li class="nav-item">
                     <a href="{{ route('routes.index') }}"
                         class="nav-link {{ Route::is('routes.*') || Route::is('route.stops.*') ? 'active' : '' }}">

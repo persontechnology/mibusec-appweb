@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolPermisoController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\StopController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,6 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('agencies', AgencyController::class);
     Route::post('agencies/{id}/restore', [AgencyController::class, 'restore'])->name('agencies.restore');
     Route::delete('agencies/{id}/forceDelete', [AgencyController::class, 'forceDelete'])->name('agencies.forceDelete');
+
+    /* vehicle routes */
+    Route::resource('vehicles', VehicleController::class);
+
+
 
     // routes resource routes
     Route::resource('routes', RouteController::class);
