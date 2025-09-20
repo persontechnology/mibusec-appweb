@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('code')->unique();
             $table->geometry('geom', subtype: 'linestring', srid: 4326);
+            $table->string('color')->default('#000000');
+
             $table->timestamps();
             $table->softDeletes();
         });

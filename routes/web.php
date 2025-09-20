@@ -3,6 +3,8 @@
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolPermisoController;
+use App\Http\Controllers\RouteController;
+use App\Http\Controllers\StopController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    //
+    Route::prefix('routes')->group(function () {
+        Route::get('create', [RouteController::class, 'create'])->name('create');
+        Route::get('{route}/create', [RouteController::class, 'createStops'])->name('routes.stops.create');
+        Route::get('{route}/stops', [RouteController::class, 'stops'])->name('routes.stops.index');
+        Route::post('store-stops', [RouteController::class, 'storeStop'])->name('routes.stops.store');
+    });
     // roles y permisos
     Route::resource('rol-permisos', RolPermisoController::class);
 
@@ -25,6 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('agencies', AgencyController::class);
     Route::post('agencies/{id}/restore', [AgencyController::class, 'restore'])->name('agencies.restore');
     Route::delete('agencies/{id}/forceDelete', [AgencyController::class, 'forceDelete'])->name('agencies.forceDelete');
+
+    // routes resource routes
+    Route::resource('routes', RouteController::class);
+    Route::resource('stops', StopController::class);
+    // stops resource routes
 
     
 });
