@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Agency;
 use App\Models\Route;
 use App\Models\RouteDistance;
 use App\Models\Stop;
@@ -20,5 +21,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(PermissionRoleUserSeed::class);
+        /* llamar al factory Agency y crear 100 registros */
+        \App\Models\Agency::factory()->count(20)->create();
+        
+
     }
 }

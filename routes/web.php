@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolPermisoController;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,12 @@ Route::middleware('auth')->group(function () {
     // roles y permisos
     Route::resource('rol-permisos', RolPermisoController::class);
 
-    // stops resource routes
+    /* agency routes */
+    Route::resource('agencies', AgencyController::class);
+    Route::post('agencies/{id}/restore', [AgencyController::class, 'restore'])->name('agencies.restore');
+    Route::delete('agencies/{id}/forceDelete', [AgencyController::class, 'forceDelete'])->name('agencies.forceDelete');
 
-    /* route stop resource routes */
+    
 });
 
 require __DIR__ . '/auth.php';

@@ -39,25 +39,12 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{ route('stops.index') }}" class="nav-link {{ Route::is('stops.*') ? 'active' : '' }}">
-								<i class="ph ph-traffic-signal"></i>
-								<span>Paradas</span>
+							<a href="{{ route('agencies.index') }}" class="nav-link {{ Route::is('agencies.*') ? 'active' : '' }}">
+								<i class="fa-solid fa-building"></i>
+								<span>Agencias</span>
 							</a>
 						</li>
 						
-						<li class="nav-item">
-							<a href="{{ route('vehicles.index') }}" class="nav-link {{ Route::is('vehicles.*') ? 'active' : '' }}">
-								<i class="ph ph-bus"></i>
-								<span>Vehiculos</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							
-							<a href="{{ route('routes.index') }}" class="nav-link {{ Route::is('routes.*') || Route::is('route.stops.*') ? 'active' : '' }}">
-								<i class="ph ph-path"></i>
-								<span>Rutas</span>
-							</a>
-						</li>
 
 						<li class="nav-item-header pt-0">
 							<div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Sistema</div>

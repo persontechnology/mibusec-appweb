@@ -57,7 +57,7 @@
 	{{-- config app dev --}}
 	<script src="{{ asset('assets/js/utils/config_head.js') }}"></script>
 	
-
+	@stack('scriptsHeader')
 
 </head>
 
@@ -672,10 +672,14 @@
 	<!-- /demo config -->
 	
 
-	{{-- Formulario global oculto --}}
+	{{-- Formulario global para eliminar --}}
 	<form id="form-global-eliminar" method="POST" style="display: none;">
 		@csrf
 		@method('DELETE')
+	</form>
+	{{-- Formulario global para restaurar --}}
+	<form id="form-global-restore" method="POST" style="display: none;">
+		@csrf
 	</form>
 
 	{{-- para los script extras, como datatable --}}
@@ -685,8 +689,6 @@
 	@stack('scripts')
 
 	<script>
-
-
 		function deleteGlobal(button) {
 			const url = $(button).data('url');
 			const info = $(button).data('info');
@@ -704,6 +706,34 @@
 							mostrarDialogoProcesando();
 
 							const form = $('#form-global-eliminar');
+							form.attr('action', url);
+							form.submit();
+						}
+					},
+					cancelar: {
+						text: 'Cancelar',
+						btnClass: 'btn-default'
+					}
+				}
+			});
+		}
+
+		function restoreGlobal(button) {
+			const url = $(button).data('url');
+			const info = $(button).data('info');
+			$.confirm({
+				title: "¿Estás seguro de restaurar este registro?",
+				content: '<strong>' + info + '</strong>',
+				icon: 'fa fa-undo',
+				type: 'blue',
+				theme: 'modern',
+				buttons: {
+					confirmar: {
+						text: 'Sí, restaurar',
+						btnClass: 'btn-blue',
+						action: function () {
+							mostrarDialogoProcesando();
+							const form = $('#form-global-restore');
 							form.attr('action', url);
 							form.submit();
 						}
