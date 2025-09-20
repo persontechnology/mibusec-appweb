@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
         Route::get('{route}/create', [RouteController::class, 'createStops'])->name('routes.stops.create');
         Route::get('{route}/stops', [RouteController::class, 'stops'])->name('routes.stops.index');
         Route::post('store-stops', [RouteController::class, 'storeStop'])->name('routes.stops.store');
+        Route::post('{route}/stops/{stop}/attach', [RouteController::class, 'attach'])->name('routes.stops.attach');
     });
     // roles y permisos
     Route::resource('rol-permisos', RolPermisoController::class);
@@ -46,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('stops', StopController::class);
     // stops resource routes
 
-    
+
 });
 
 require __DIR__ . '/auth.php';

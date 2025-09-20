@@ -108,7 +108,8 @@ class RouteController extends Controller
     function createStops(Route $route)
     {
         $stops = (new StopRepository())->getStopsWithDistance($route);
-        return view('routes.stops.create', compact(['stops', 'route']));
+        $stopsNotInRoute = (new StopRepository())->getStopsNotInRoute($route);
+        return view('routes.stops.create', compact(['stops', 'route', 'stopsNotInRoute']));
     }
 
     public function storeStop(Request $request)
@@ -137,5 +138,21 @@ class RouteController extends Controller
         $routeStop->save();
 
         return redirect()->route('routes.stops.index', ['route' => $request->route_id])->with('success', 'Stop created successfully!');
+    }
+    public function attach(Request $request, Route $route, Stop $stop)
+    {
+        $maxOrder = DB::table('route_stops')
+            ->where('route_id', $route->id)
+            ->max('stop_order') ?? 0;
+
+        DB::table('route_stops')->insert([
+            'route_id' => $route->id,
+            'stop_id' => $stop->id,
+            'stop_order' => $maxOrder + 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return response()->json(['message' => 'Parada asociada correctamente.']);
     }
 }

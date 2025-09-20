@@ -55,32 +55,34 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         let routeLayers2 = {};
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicializamos el mapa centrado en la primera coordenada de la ruta
 
+        document.addEventListener('DOMContentLoaded', function() {
             const route = @json($route ?? null);
+            const stops = @json($stops ?? []);
+            const stopsNotInRoute = @json($stopsNotInRoute ?? []);
+
             const map = L.map('map').setView([-0.180653, -78.467838], 13);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
 
-
             let routeLayers = [];
+
             if (route) {
                 let coordinates = JSON.parse(route.coordinates);
                 if (coordinates.length > 0) {
-                    const latlngs = coordinates.map(p => [p[1], p[0]]); // [lat, lng]
+                    const latlngs = coordinates.map(p => [p[1], p[0]]);
                     const polyline = L.polyline(latlngs, {
                         color: route?.color || 'blue',
                         weight: 4
                     }).addTo(map);
-                    polyline
-                        .bindPopup(`<b>${route.name}</b>`)
-                        .openPopup();
 
-                    // Marker de inicio (menos opaco)
+                    polyline.bindPopup(`<b>${route.name}</b>`).openPopup();
+
                     const start = latlngs[0];
+                    const end = latlngs[latlngs.length - 1];
+
                     const startIcon = L.circleMarker(start, {
                         radius: 10,
                         color: route?.color || 'blue',
@@ -89,8 +91,6 @@
                         opacity: 0.4
                     }).addTo(map).bindPopup(`<b>Inicio</b><br>${route.name}`).openPopup();
 
-                    // Marker de fin (más opaco)
-                    const end = latlngs[latlngs.length - 1];
                     const endIcon = L.circleMarker(end, {
                         radius: 10,
                         color: route?.color || 'blue',
@@ -101,7 +101,6 @@
 
                     routeLayers.push(polyline, startIcon, endIcon);
 
-                    // Guardar referencia para centrar el mapa después
                     routeLayers2[route.id] = {
                         polyline: polyline,
                         bounds: polyline.getBounds(),
@@ -109,44 +108,32 @@
                         name: route.name
                     };
 
-                    // Centrar el mapa en la primera ruta al cargar
-
                     map.fitBounds(polyline.getBounds());
-
                 }
             }
 
-            function getRandomColor() {
-                const letters = '0123456789ABCDEF';
-                let color = '#';
-                for (let i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                }
-                return color;
-            }
-            // Marcador de parada
+            // Crear parada nueva haciendo click en el mapa
             let marker = null;
             map.on('click', function(e) {
                 if (marker) map.removeLayer(marker);
-                console.log(e.latlng, 'latlng', e.latlng.lat, e.latlng.lng);
 
                 marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+
                 document.getElementById('locationInput').value = JSON.stringify({
                     lat: e.latlng.lat,
                     lng: e.latlng.lng
                 });
             });
 
-            // Validación al enviar
             const form = document.getElementById('stopForm');
             form.addEventListener('submit', function(e) {
                 if (!document.getElementById('locationInput').value) {
                     e.preventDefault();
-                    alert('Please place the stop on the map.');
+                    alert('Por favor, selecciona una ubicación en el mapa.');
                 }
             });
 
-            stops = @json($stops ?? []);
+            // Dibujar las paradas ya asociadas a la ruta
             stops.forEach(stop => {
                 L.marker([stop.lat, stop.lng])
                     .addTo(map)
@@ -159,20 +146,94 @@
                     fillOpacity: 0.9
                 }).addTo(map).bindTooltip(`
                 <div style="min-width:180px">
+                    <div style="font-weight:bold; color:${route?.color || '#007bff'}">
+                        Parada ${stop.ord}: ${stop.name}
+                    </div>
+                    <div style="font-size:0.95em; color:#555;">
+                        <i class="fa-solid fa-location-dot"></i> ${stop.lat}, ${stop.lng}
+                    </div>
+                    <div style="font-size:0.95em; color:#888;">
+                        Distancia anterior: ${stop.distance_from_prev ?? 0}
+                    </div>
+                </div>
+            `, {
+                    permanent: true,
+                    direction: "center"
+                });
+            });
+
+            // Dibujar paradas NO asociadas con botón para agregarlas
+            stopsNotInRoute.forEach(stop => {
+                const marker = L.marker([stop.lat, stop.lng]).addTo(map);
+                const circle = L.circleMarker([stop.lat, stop.lng], {
+                    radius: 10,
+                    color: "black",
+                    fillColor: "orange",
+                    fillOpacity: 0.9
+                }).addTo(map);
+
+                const popupContent = document.createElement('div');
+                popupContent.innerHTML = `
+                <div style="min-width:180px">
+                    <div style="font-weight:bold; color:#AB1B00">
+                        Parada: ${stop.name}
+                    </div>
+                    <div style="margin-top:6px;">
+                        <button class="btn btn-sm btn-primary">Agregar a ruta</button>
+                    </div>
+                </div>
+            `;
+
+                popupContent.querySelector('button').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const routeId = route.id;
+
+                    fetch(`/routes/${routeId}/stops/${stop.id}/attach`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            },
+                            body: JSON.stringify({})
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            alert(data.message || 'Parada agregada correctamente.');
+
+                            // Eliminar marker y circle del mapa
+                            map.removeLayer(marker);
+                            map.removeLayer(circle);
+
+                            // Opcional: agregar visualmente como parada de ruta (amarillo con tooltip)
+                            const newCircle = L.circleMarker([stop.lat, stop.lng], {
+                                radius: 10,
+                                color: "black",
+                                fillColor: "yellow",
+                                fillOpacity: 0.9
+                            }).addTo(map).bindTooltip(`
+                        <div style="min-width:180px">
                             <div style="font-weight:bold; color:${route?.color || '#007bff'}">
-                                Parada ${stop.ord}: ${stop.name}
+                                Parada (nueva): ${stop.name}
                             </div>
                             <div style="font-size:0.95em; color:#555;">
                                 <i class="fa-solid fa-location-dot"></i> ${stop.lat}, ${stop.lng}
                             </div>
                             <div style="font-size:0.95em; color:#888;">
-                                Distancia anterior: ${stop.distance_from_prev ?? 0}
+                                Distancia anterior: -
                             </div>
                         </div>
-                `, {
-                    permanent: true,
-                    direction: "center"
+                    `, {
+                                permanent: true,
+                                direction: "center"
+                            });
+                        })
+                        .catch(err => {
+                            alert('Error al agregar parada.');
+                            console.error(err);
+                        });
                 });
+
+                circle.bindPopup(popupContent);
             });
         });
     </script>

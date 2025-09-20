@@ -47,4 +47,23 @@ class StopRepository
 
         return $stops;
     }
+    public function getStopsNotInRoute(Route $route)
+    {
+        $stops = DB::table('stops as s')
+            ->leftJoin('route_stops as rs', function ($join) use ($route) {
+                $join->on('rs.stop_id', '=', 's.id')
+                    ->where('rs.route_id', '=', $route->id);
+            })
+            ->select(
+                's.id',
+                's.name',
+                DB::raw("ST_Y(s.geom::geometry) as lat"),
+                DB::raw("ST_X(s.geom::geometry) as lng")
+            )
+            ->whereNull('rs.id')
+            ->whereNull('s.deleted_at')
+            ->get();
+
+        return $stops;
+    }
 }

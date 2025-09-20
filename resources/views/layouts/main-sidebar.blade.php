@@ -27,13 +27,13 @@
         <div class="sidebar-section">
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
-				<!-- Main -->
-						
+                <!-- Main -->
+
                 <li class="nav-item-header pt-0">
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Main</div>
                     <i class="ph-dots-three sidebar-resize-show"></i>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}" class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}">
                         <i class="ph-house"></i>
@@ -41,7 +41,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('agencies.index') }}" class="nav-link {{ Route::is('agencies.*') ? 'active' : '' }}">
+                    <a href="{{ route('agencies.index') }}"
+                        class="nav-link {{ Route::is('agencies.*') ? 'active' : '' }}">
                         <i class="fa-solid fa-building"></i>
                         <span>Agencias</span>
                     </a>
@@ -54,6 +55,7 @@
                     </a>
                 </li>
                 
+
                 <li class="nav-item">
                     <a href="{{ route('routes.index') }}"
                         class="nav-link {{ Route::is('routes.*') || Route::is('route.stops.*') ? 'active' : '' }}">
