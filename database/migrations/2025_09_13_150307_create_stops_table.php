@@ -13,11 +13,20 @@ return new class extends Migration
     {
         Schema::create('stops', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->geometry('geom', subtype: 'point', srid: 4326);
+            $table->string('code')->unique();
+            $table->string('name')->nullable();
+            /* dame la url de la parada despues que se crea */
+            $table->string('url_stop')->unique()->nullable();
+            $table->geometry('geom', subtype: 'point', srid: 4326); // dame la otra forma tipo polygon
+            $table->geometry('geom_polygon', subtype: 'polygon', srid: 4326)->nullable(); // Geometría en forma de polígono
+            $table->index(['geom']); // Indexar la columna geom para mejorar el rendimiento de las consultas espaciales
+            $table->string('foto')->nullable(); // URL o ruta de la foto
+            $table->boolean('estado')->default(true); // Estado activo/inactivo, para interpretar si esta en servicio o no  
+            $table->text('descripcion')->nullable(); // Descripción de la parada
             $table->timestamps();
             $table->softDeletes();
         });
+         
     }
 
     /**

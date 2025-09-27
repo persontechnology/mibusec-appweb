@@ -39,8 +39,9 @@ Route::middleware('auth')->group(function () {
 
     /* vehicle routes */
     Route::resource('vehicles', VehicleController::class);
-
-
+    /* restore */
+    Route::post('vehicles/{id}/restore', [VehicleController::class, 'restore'])->name('vehicles.restore');
+    Route::delete('vehicles/{id}/forceDelete', [VehicleController::class, 'forceDelete'])->name('vehicles.forceDelete');
 
     // routes resource routes
     Route::resource('routes', RouteController::class);

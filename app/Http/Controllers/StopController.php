@@ -12,7 +12,7 @@ class StopController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

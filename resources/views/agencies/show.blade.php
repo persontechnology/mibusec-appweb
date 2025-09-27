@@ -3,26 +3,21 @@
 @section('breadcrumb')
     {{ Breadcrumbs::render('agencies.show', $agency) }}
 @endsection
+@section('breadcrumb_elements')
+    <div class="d-lg-flex mb-2 mb-lg-0">
+        <a href="{{ route('agencies.index') }}" class="d-flex align-items-center text-body py-2">
+            <i class="fa-solid fa-arrow-left me-1"></i>
+            Volver a agencias
+        </a>
+    </div>
+@endsection
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
             <div class="card shadow-sm">
-                <div class="card-header bg-transparent border-0 pb-0 d-flex align-items-center">
-                    <span class="badge bg-warning text-dark me-2">Agencia</span>
-                    @if($agency->trashed())
-                        <span class="badge bg-danger">Eliminada</span>
-                    @else
-                        <span class="badge bg-success">Activa</span>
-                    @endif
-                    <div class="ms-auto">
-                       
-                        <a href="{{ route('agencies.index') }}" class="btn btn-sm btn-outline-secondary">
-                            <i class="fa-solid fa-arrow-left me-1"></i> Volver
-                        </a>
-                    </div>
-                </div>
+             
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-4">
                         @if($agency->image)

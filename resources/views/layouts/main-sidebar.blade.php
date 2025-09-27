@@ -55,6 +55,14 @@
                     </a>
                 </li>
                 
+                {{-- stop --}}
+                <li class="nav-item">
+                    <a href="{{ route('stops.index') }}"
+                        class="nav-link {{ Route::is('stops.*') ? 'active' : '' }}">
+                        <i class="ph ph-signpost"></i>
+                        <span>Paradas</span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('routes.index') }}"

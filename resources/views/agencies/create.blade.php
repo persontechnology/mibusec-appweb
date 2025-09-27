@@ -4,6 +4,16 @@
     {{ Breadcrumbs::render('agencies.create') }}
 @endsection
 
+@section('breadcrumb_elements')
+    <div class="d-lg-flex mb-2 mb-lg-0">
+        <a href="{{ route('agencies.index') }}" class="d-flex align-items-center text-body py-2">
+            <i class="fa-solid fa-arrow-left me-1"></i>
+            Volver a agencias
+        </a>
+    </div>
+@endsection
+
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

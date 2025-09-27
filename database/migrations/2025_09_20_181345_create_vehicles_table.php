@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('color')->nullable();
             $table->text('observaciones')->nullable();
             $table->string('foto')->nullable();
+            $table->softDeletes();
 
 
             $table->timestamps();

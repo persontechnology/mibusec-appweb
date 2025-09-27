@@ -7,9 +7,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Stop extends Model
-{
+{   
+    
     use SoftDeletes;
-    protected $fillable = ['name', 'location', 'status'];
+
+    protected $fillable = [
+        'code',
+        'name',
+        'url_stop',
+        'geom',
+        'geom_polygon',
+        'foto',
+        'estado',
+        'descripcion',
+    ];
 
     // Mutador: crear POINT desde array ['lat'=>..., 'lng'=>...]
     public function setLocationAttribute($value)

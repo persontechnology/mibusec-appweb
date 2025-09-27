@@ -13,4 +13,14 @@ class Agency extends Model
     protected $fillable = [
         'name', 'email', 'phone', 'image',
     ];
+
+
+    
+    // Relacion muchos a muchos con Vehicle a traves de agency_vehicles
+    public function vehicles(){
+        return $this->belongsToMany(Vehicle::class, 'agency_vehicles')
+        ->withTimestamps()
+        ->withPivot(['assigned_by', 'status', 'notes', 'deleted_at']);
+    }
+
 }
