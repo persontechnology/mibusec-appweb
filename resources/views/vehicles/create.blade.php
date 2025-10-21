@@ -27,7 +27,7 @@
                                 {{-- Selección de agencia --}}
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <select name="agency_id" id="agency_id" class="form-select @error('agency_id') is-invalid @enderror">
+                                        <select name="agency_id" id="agency_id" class="form-select @error('agency_id') is-invalid @enderror" required>
                                             <option value="">-- Selecciona una agencia --</option>
                                             @foreach($agencies as $agency)
                                                 <option value="{{ $agency->id }}" {{ old('agency_id') == $agency->id ? 'selected' : '' }}>

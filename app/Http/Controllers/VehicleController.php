@@ -81,7 +81,7 @@ class VehicleController extends Controller
             'latitud'     => 'required|numeric|between:-90,90',
             'longitud'    => 'required|numeric|between:-180,180',
             'foto'        => 'nullable|image|max:2048',
-            'agency_id'   => 'nullable|exists:agencies,id',
+            'agency_id'   => 'required|exists:agencies,id',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -144,7 +144,7 @@ class VehicleController extends Controller
             'latitud'     => 'required|numeric|between:-90,90',
             'longitud'    => 'required|numeric|between:-180,180',
             'foto'        => 'nullable|image|max:2048',
-            'agency_id'   => 'nullable|exists:agencies,id',
+            'agency_id'   => 'required|exists:agencies,id',
         ]);
 
         if ($request->hasFile('foto')) {
